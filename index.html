@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibecoding for Ecologists — Workshop</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#schedule">Schedule</a>
+                <a href="tutorials/index.html">Tutorials</a>
+                <a href="#datasets">Datasets</a>
+                <a href="#examples">Examples</a>
+                <a href="#setup">Setup</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Workshop — 2026</div>
+            <h1>From Idea to<br><span class="gradient-text">Deployed App</span><br>in 4 Hours</h1>
+            <p class="hero-subtitle">
+                A hands-on workshop for ecology students. Use AI to build and deploy 
+                real web applications from ecological data — no coding experience required.
+            </p>
+            <div class="hero-actions">
+                <a href="#setup" class="btn btn-primary">Get Started →</a>
+                <a href="tutorials/index.html" class="btn btn-secondary">Browse Tutorials</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Hours</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">0</span>
+                    <span class="stat-label">Coding Experience Required</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">Deployed App</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">What is Vibecoding?</h2>
+            <div class="two-column">
+                <div class="column">
+                    <p class="lead">
+                        Vibecoding is a new way of building software where you describe what you want 
+                        in plain English, and AI builds it for you. Instead of learning programming 
+                        syntax, you learn to communicate your ideas clearly.
+                    </p>
+                    <p>
+                        The term was coined by Andrej Karpathy (co-founder of OpenAI) in 2025: 
+                        <em>"Fully give in to the vibes, embrace exponentials, and forget that the code even exists."</em>
+                    </p>
+                    <p>
+                        For ecologists, this means you can turn your data into interactive dashboards, 
+                        maps, and analysis tools without spending years learning to code. Your domain 
+                        expertise <strong>is</strong> the most valuable skill.
+                    </p>
+                </div>
+                <div class="column">
+                    <div class="info-card">
+                        <h3>🎯 Who This is For</h3>
+                        <ul>
+                            <li>Senior undergraduates in ecology & related fields</li>
+                            <li>Graduate students working with ecological data</li>
+                            <li>Anyone interested in building research tools</li>
+                            <li>No programming experience needed</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>🛠️ What You'll Build</h3>
+                        <ul>
+                            <li>Interactive data dashboards</li>
+                            <li>Species distribution maps</li>
+                            <li>Water quality monitors</li>
+                            <li>Biodiversity analysis tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Describe</h3>
+                    <p>Tell the AI what you want in plain English. "Build me a dashboard that shows species distributions on a map."</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Iterate</h3>
+                    <p>Review what the AI built. Ask for changes: "Make the points larger and color them by conservation status."</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Deploy</h3>
+                    <p>Push your app to the web with one click. Share the link with your lab, your supervisor, or the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="section">
+        <div class="container">
+            <h2 class="section-title">Workshop Schedule</h2>
+            <div class="schedule">
+                <div class="schedule-item">
+                    <div class="schedule-time">Hour 1</div>
+                    <div class="schedule-content">
+                        <h3>Setup & Foundations</h3>
+                        <p>Live demo, tool setup, choose your dataset, build and deploy your first "Hello World" app.</p>
+                        <div class="schedule-tags">
+                            <span class="tag">Demo</span>
+                            <span class="tag">Setup</span>
+                            <span class="tag">First Deploy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">Hour 2</div>
+                    <div class="schedule-content">
+                        <h3>Build Your App</h3>
+                        <p>Learn prompting tips, then free build time. Load your data, create visualizations, add interactivity.</p>
+                        <div class="schedule-tags">
+                            <span class="tag">Prompting</span>
+                            <span class="tag">Data Loading</span>
+                            <span class="tag">Visualization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">☕ Break</div>
+                    <div class="schedule-content">
+                        <h3>15 Minutes</h3>
+                        <p>Recharge. Check out what others are building.</p>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">Hour 3</div>
+                    <div class="schedule-content">
+                        <h3>Enhance & Polish</h3>
+                        <p>Quick demos of works in progress. Add more features, improve UI, handle edge cases.</p>
+                        <div class="schedule-tags">
+                            <span class="tag">Features</span>
+                            <span class="tag">UI Polish</span>
+                            <span class="tag">Show & Tell</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">Hour 4</div>
+                    <div class="schedule-content">
+                        <h3>Deploy & Present</h3>
+                        <p>Deploy your app live on the web. Lightning presentations — show off what you built!</p>
+                        <div class="schedule-tags">
+                            <span class="tag">Deployment</span>
+                            <span class="tag">Presentations</span>
+                            <span class="tag">🎉 Celebrate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Datasets Section -->
+    <section id="datasets" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Choose Your Dataset</h2>
+            <p class="section-subtitle">Pick a dataset that interests you, or bring your own research data.</p>
+            <div class="card-grid">
+                <div class="dataset-card">
+                    <div class="card-icon">🐧</div>
+                    <h3>Palmer Penguins</h3>
+                    <p>Morphological measurements of three penguin species in Antarctica. Great for exploring biodiversity patterns.</p>
+                    <div class="card-meta">
+                        <span>344 observations</span>
+                        <span>8 variables</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-sm">Biodiversity</span>
+                        <span class="tag tag-sm">Morphology</span>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <div class="card-icon">💧</div>
+                    <h3>Water Quality Monitoring</h3>
+                    <p>Multi-parameter water quality data from monitoring stations. Temperature, pH, dissolved oxygen, nutrients, and more.</p>
+                    <div class="card-meta">
+                        <span>500+ observations</span>
+                        <span>12 variables</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-sm">Limnology</span>
+                        <span class="tag tag-sm">GIS</span>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <div class="card-icon">🌿</div>
+                    <h3>Threatened Plants</h3>
+                    <p>Global data on threatened plant species, their conservation status, and the threats they face.</p>
+                    <div class="card-meta">
+                        <span>500 species</span>
+                        <span>Conservation data</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-sm">Conservation</span>
+                        <span class="tag tag-sm">IUCN</span>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <div class="card-icon">🌲</div>
+                    <h3>Global Forest Change</h3>
+                    <p>Deforestation and afforestation data across countries and decades. Track how forests are changing worldwide.</p>
+                    <div class="card-meta">
+                        <span>Global coverage</span>
+                        <span>Time series</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-sm">Land Use</span>
+                        <span class="tag tag-sm">Deforestation</span>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <div class="card-icon">🦅</div>
+                    <h3>Wildlife Impacts</h3>
+                    <p>Wildlife strike data with coordinates, species identification, and impact details. Map and analyze spatial patterns.</p>
+                    <div class="card-meta">
+                        <span>56,000+ records</span>
+                        <span>Geospatial</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-sm">Wildlife</span>
+                        <span class="tag tag-sm">Mapping</span>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Bring Your Own</h3>
+                    <p>Have your own research data? Bring a CSV file and build an app around it. We'll help you get started.</p>
+                    <div class="card-meta">
+                        <span>Any CSV</span>
+                        <span>Your research</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag tag-sm">Custom</span>
+                        <span class="tag tag-sm">Research</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="section">
+        <div class="container">
+            <h2 class="section-title">Example Apps</h2>
+            <p class="section-subtitle">Here's what you can build in 4 hours. These were all created using vibecoding.</p>
+            <div class="example-grid">
+                <div class="example-card">
+                    <div class="example-preview">
+                        <div class="example-placeholder">🐧 Biodiversity Explorer</div>
+                    </div>
+                    <div class="example-info">
+                        <h3>Penguin Biodiversity Explorer</h3>
+                        <p>Interactive dashboard exploring Palmer Penguins morphology with scatter plots, histograms, and species comparison.</p>
+                        <div class="example-links">
+                            <a href="https://github.com/akasanakha/vibecoding-workshop/tree/main/examples/biodiversity_explorer" class="btn btn-sm">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-preview">
+                        <div class="example-placeholder">💧 Water Quality Dashboard</div>
+                    </div>
+                    <div class="example-info">
+                        <h3>Water Quality Dashboard</h3>
+                        <p>Multi-station monitoring dashboard with interactive maps, time series, and parameter correlation analysis.</p>
+                        <div class="example-links">
+                            <a href="https://github.com/akasanakha/vibecoding-workshop/tree/main/examples/water_quality_dashboard" class="btn btn-sm">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-preview">
+                        <div class="example-placeholder">🦅 Species Impact Analyzer</div>
+                    </div>
+                    <div class="example-info">
+                        <h3>Species Impact Analyzer</h3>
+                        <p>Map and analyze wildlife impact data with filtering by species and location, timeline views, and summary statistics.</p>
+                        <div class="example-links">
+                            <a href="https://github.com/akasanakha/vibecoding-workshop/tree/main/examples/species_impact_analyzer" class="btn btn-sm">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Pre-Workshop Setup</h2>
+            <p class="section-subtitle">Complete these steps before the workshop to maximize your build time.</p>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <div class="setup-icon">🤖</div>
+                    <h3>Step 1: AI Assistant Account</h3>
+                    <p>Sign up for a free account with one of these AI coding assistants:</p>
+                    <div class="tool-options">
+                        <a href="https://claude.ai" class="tool-link" target="_blank">Claude (recommended)</a>
+                        <a href="https://chat.openai.com" class="tool-link" target="_blank">ChatGPT</a>
+                        <a href="https://cursor.sh" class="tool-link" target="_blank">Cursor IDE</a>
+                        <a href="https://replit.com" class="tool-link" target="_blank">Replit</a>
+                    </div>
+                </div>
+                <div class="setup-step">
+                    <div class="setup-icon">🐙</div>
+                    <h3>Step 2: GitHub Account</h3>
+                    <p>Create a free account at <a href="https://github.com" target="_blank">github.com</a>. This is where your code will live.</p>
+                </div>
+                <div class="setup-step">
+                    <div class="setup-icon">🚀</div>
+                    <h3>Step 3: Deployment Platform</h3>
+                    <p>Sign up for a free account to deploy your app:</p>
+                    <div class="tool-options">
+                        <a href="https://streamlit.io/cloud" class="tool-link" target="_blank">Streamlit Cloud (easiest)</a>
+                        <a href="https://vercel.com" class="tool-link" target="_blank">Vercel</a>
+                        <a href="https://netlify.com" class="tool-link" target="_blank">Netlify</a>
+                    </div>
+                </div>
+                <div class="setup-step">
+                    <div class="setup-icon">✅</div>
+                    <h3>Step 4: Test It Out</h3>
+                    <p>Try asking your AI assistant: <code>"Write a Python script that prints 'Hello, ecology!'"</code> — if it responds with code, you're ready!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommended Stack -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Choose Your Stack</h2>
+            <div class="stack-grid">
+                <div class="stack-card recommended">
+                    <div class="stack-badge">Recommended</div>
+                    <h3>🐍 Python + Streamlit</h3>
+                    <p>Best for: Data-focused apps, dashboards, and anyone familiar with R or Python basics.</p>
+                    <ul>
+                        <li>Feels like writing a script</li>
+                        <li>Built-in data visualization</li>
+                        <li>One-click deployment</li>
+                        <li>Minimal web knowledge needed</li>
+                    </ul>
+                    <div class="stack-deploy">Deploy on: Streamlit Cloud</div>
+                </div>
+                <div class="stack-card">
+                    <h3>🌐 HTML/JS + Vercel</h3>
+                    <p>Best for: The adventurous. More polished results, more transferable web development skills.</p>
+                    <ul>
+                        <li>Full web app capabilities</li>
+                        <li>Client-side interactivity</li>
+                        <li>More design freedom</li>
+                        <li>Transferable skills</li>
+                    </ul>
+                    <div class="stack-deploy">Deploy on: Vercel or Netlify</div>
+                </div>
+                <div class="stack-card">
+                    <h3>☁️ Replit (All-in-One)</h3>
+                    <p>Best for: Zero experience. Everything runs in the browser — no local setup needed at all.</p>
+                    <ul>
+                        <li>Browser-based IDE</li>
+                        <li>Built-in AI assistant</li>
+                        <li>Instant deployment</li>
+                        <li>Nothing to install</li>
+                    </ul>
+                    <div class="stack-deploy">Deploy on: Replit</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Resources</h2>
+            <div class="resource-grid">
+                <a href="tutorials/index.html" class="resource-card">
+                    <h3>📖 Tutorials</h3>
+                    <p>Step-by-step guides for building ecology apps with AI assistance.</p>
+                </a>
+                <a href="tutorials/prompting.html" class="resource-card">
+                    <h3>💬 Prompting Guide</h3>
+                    <p>How to communicate effectively with AI coding assistants.</p>
+                </a>
+                <a href="tutorials/streamlit-basics.html" class="resource-card">
+                    <h3>🐍 Streamlit Basics</h3>
+                    <p>Quick introduction to Streamlit for data apps.</p>
+                </a>
+                <a href="tutorials/deployment.html" class="resource-card">
+                    <h3>🚀 Deployment Guide</h3>
+                    <p>How to get your app live on the web.</p>
+                </a>
+                <a href="https://github.com/filipecalegario/awesome-vibe-coding" class="resource-card" target="_blank">
+                    <h3>🔗 Awesome Vibe Coding</h3>
+                    <p>Curated list of vibecoding tools, references, and communities.</p>
+                </a>
+                <a href="tutorials/troubleshooting.html" class="resource-card">
+                    <h3>🔧 Troubleshooting</h3>
+                    <p>Common issues and how to fix them.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — Built with vibecoding by <a href="https://github.com/akasanakha">Akasa Nakha</a></p>
+            <p class="footer-sub">Workshop materials are open source. <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

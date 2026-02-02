@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>Data Visualization with Plotly</h1>
+        <div class="meta">📖 20 min read · 🟡 Intermediate</div>
+
+        <p><strong>Good visualizations make your data tell a story.</strong> Plotly creates interactive charts that users can zoom, pan, hover over, and explore — perfect for ecological data.</p>
+
+        <h2>Why Plotly?</h2>
+        <ul>
+            <li><strong>Interactive</strong> — zoom, pan, hover for details, click to select</li>
+            <li><strong>Beautiful defaults</strong> — looks professional out of the box</li>
+            <li><strong>Streamlit integration</strong> — works seamlessly with <code>st.plotly_chart()</code></li>
+            <li><strong>Maps included</strong> — built-in geographic visualization</li>
+        </ul>
+
+        <h2>Chart Types for Ecology</h2>
+
+        <h3>Scatter Plots — Relationships Between Variables</h3>
+        <p>Perfect for: morphometric comparisons, environmental gradients, correlation exploration.</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Create a scatter plot of body mass vs flipper length, colored by species. Add trendlines for each species. Include proper axis labels with units."</p>
+        </div>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>fig = px.scatter(
+    df, x="flipper_length_mm", y="body_mass_g",
+    color="species",
+    trendline="ols",
+    labels={
+        "flipper_length_mm": "Flipper Length (mm)",
+        "body_mass_g": "Body Mass (g)"
+    },
+    title="Body Mass vs Flipper Length by Species"
+)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h3>Bar Charts — Comparisons Across Categories</h3>
+        <p>Perfect for: species counts, habitat comparisons, treatment effects.</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Create a grouped bar chart comparing mean body mass across species, grouped by island. Add error bars showing standard deviation."</p>
+        </div>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre># Compute summary stats
+summary = df.groupby(["species", "island"])["body_mass_g"].agg(["mean", "std"]).reset_index()
+
+fig = px.bar(
+    summary, x="species", y="mean", color="island",
+    error_y="std", barmode="group",
+    labels={"mean": "Mean Body Mass (g)", "species": "Species"},
+    title="Body Mass by Species and Island"
+)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h3>Box Plots — Distribution Comparison</h3>
+        <p>Perfect for: comparing measurements across groups, identifying outliers.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>fig = px.box(
+    df, x="species", y="bill_length_mm", color="species",
+    points="all",  # Show individual data points
+    labels={"bill_length_mm": "Bill Length (mm)"},
+    title="Bill Length Distribution by Species"
+)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h3>Histograms — Distribution of a Single Variable</h3>
+        <p>Perfect for: understanding data spread, identifying patterns.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>fig = px.histogram(
+    df, x="body_mass_g", color="species",
+    nbins=30, opacity=0.7,
+    marginal="box",  # Adds box plot on top
+    labels={"body_mass_g": "Body Mass (g)"},
+    title="Distribution of Body Mass"
+)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h3>Line Charts — Time Series</h3>
+        <p>Perfect for: monitoring data, population trends, seasonal patterns.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>fig = px.line(
+    df, x="date", y="temperature",
+    color="station",
+    labels={"temperature": "Temperature (°C)", "date": "Date"},
+    title="Water Temperature Over Time"
+)
+fig.update_layout(hovermode="x unified")
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h3>Heatmaps — Correlation Matrices</h3>
+        <p>Perfect for: identifying relationships between many variables at once.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>import plotly.figure_factory as ff
+
+# Select numeric columns
+numeric_cols = df.select_dtypes(include="number").columns
+corr = df[numeric_cols].corr()
+
+fig = px.imshow(
+    corr,
+    labels=dict(color="Correlation"),
+    color_continuous_scale="RdBu_r",
+    zmin=-1, zmax=1,
+    title="Variable Correlation Matrix"
+)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h2>Color Schemes for Ecology</h2>
+
+        <p>Ask the AI for nature-inspired palettes:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Change the color scheme to something nature-inspired. Use greens, blues, and earth tones. Apply it consistently across all charts."</p>
+        </div>
+
+        <p>Useful Plotly color scales:</p>
+        <ul>
+            <li><strong>Viridis</strong> — perceptually uniform, colorblind-friendly</li>
+            <li><strong>Earth</strong> — browns and greens</li>
+            <li><strong>Tealrose</strong> — teal to pink gradient</li>
+            <li><strong>Temps</strong> — cool to warm temperature scale</li>
+        </ul>
+
+        <h2>Making Charts Publication-Ready</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Make this chart publication-quality: increase font sizes, use a clean white background, add proper axis labels with units, include a descriptive title, and make sure the legend is clearly readable."</p>
+        </div>
+
+        <div class="tutorial-nav">
+            <a href="first-app.html">← Build Your First App</a>
+            <a href="maps.html">Next: Interactive Maps →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

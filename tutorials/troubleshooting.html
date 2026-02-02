@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>Troubleshooting</h1>
+        <div class="meta">🔧 Reference · 🟢 All levels</div>
+
+        <p><strong>Errors happen. That's normal.</strong> The key vibecoding skill for debugging: copy the exact error message and paste it to the AI with context about what you were trying to do.</p>
+
+        <h2>The Universal Fix</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Debug Prompt Template</div>
+            <p>I'm getting this error when I [describe what you were doing]:
+
+[paste the FULL error message]
+
+Here's my current code:
+[paste your code]
+
+What's wrong and how do I fix it?</p>
+        </div>
+
+        <div class="tip-box success">
+            <h4>💡 This works 90% of the time</h4>
+            <p>AI assistants are extremely good at reading error messages and suggesting fixes. The key is giving them the complete error and your code.</p>
+        </div>
+
+        <h2>Common Errors</h2>
+
+        <h3>ModuleNotFoundError: No module named 'X'</h3>
+        <p><strong>What it means:</strong> A Python package isn't installed.</p>
+        <p><strong>Fix:</strong></p>
+        <div class="code-block">
+            <pre>pip install X</pre>
+        </div>
+        <p>Common packages you might need: <code>streamlit</code>, <code>pandas</code>, <code>plotly</code>, <code>numpy</code>, <code>folium</code>, <code>streamlit-folium</code></p>
+
+        <h3>KeyError: 'column_name'</h3>
+        <p><strong>What it means:</strong> Your code references a column that doesn't exist in the dataframe.</p>
+        <p><strong>Fix:</strong> Check your actual column names:</p>
+        <div class="code-block">
+            <pre># Add this to your app temporarily to see column names:
+st.write(df.columns.tolist())</pre>
+        </div>
+        <p>Then tell the AI: "The column is called 'Species' not 'species'" (capitalization matters!).</p>
+
+        <h3>FileNotFoundError: No such file or directory</h3>
+        <p><strong>What it means:</strong> The app can't find your data file.</p>
+        <p><strong>Fix:</strong></p>
+        <ul>
+            <li>Use relative paths: <code>"data.csv"</code> not <code>"/home/user/data.csv"</code></li>
+            <li>Make sure the file is in the same directory as your app.py</li>
+            <li>Better yet: load from a URL instead of a local file</li>
+        </ul>
+
+        <h3>"StreamlitAPIException" or white screen</h3>
+        <p><strong>What it means:</strong> Something in your Streamlit code is incorrect.</p>
+        <p><strong>Fix:</strong> Check the terminal where you ran <code>streamlit run app.py</code> — the full error will be there. Paste it to the AI.</p>
+
+        <h3>Charts show no data / empty charts</h3>
+        <p><strong>What it means:</strong> Usually your filters are excluding all data, or there are NaN values.</p>
+        <p><strong>Fix:</strong></p>
+        <div class="code-block">
+            <pre># Add after filtering to check:
+st.write(f"Filtered data has {len(filtered_df)} rows")
+st.write(filtered_df.head())
+
+# Drop NaN values before plotting:
+plot_df = filtered_df.dropna(subset=["column_x", "column_y"])</pre>
+        </div>
+
+        <h3>"TypeError: unhashable type" with st.cache_data</h3>
+        <p><strong>What it means:</strong> Streamlit's caching is having trouble with your function.</p>
+        <p><strong>Fix:</strong> Tell the AI: "I'm getting a cache error. Can you modify the cached function to avoid unhashable types?"</p>
+
+        <h3>App is extremely slow</h3>
+        <p><strong>Possible causes:</strong></p>
+        <ul>
+            <li>Loading large datasets without caching — add <code>@st.cache_data</code></li>
+            <li>Too many data points on a map — sample your data: <code>df.sample(1000)</code></li>
+            <li>Complex computations on every interaction — cache intermediate results</li>
+        </ul>
+
+        <h2>Deployment-Specific Issues</h2>
+
+        <h3>App works locally but crashes on Streamlit Cloud</h3>
+        <ul>
+            <li>Check <code>requirements.txt</code> — are ALL packages listed?</li>
+            <li>Check file paths — no absolute paths!</li>
+            <li>Check Streamlit Cloud logs: Manage app → Logs</li>
+        </ul>
+
+        <h3>"Your app is having trouble loading"</h3>
+        <ul>
+            <li>The app might have an error on startup — check logs</li>
+            <li>Memory limit exceeded — reduce data size or optimize</li>
+            <li>Package installation failed — check requirements.txt for typos</li>
+        </ul>
+
+        <h2>Getting Help During the Workshop</h2>
+
+        <ol>
+            <li><strong>First:</strong> Copy the error and ask your AI assistant</li>
+            <li><strong>Second:</strong> Try the relevant fix from this page</li>
+            <li><strong>Third:</strong> Ask a workshop instructor</li>
+            <li><strong>Last resort:</strong> Start fresh from the checkpoint template</li>
+        </ol>
+
+        <div class="tip-box">
+            <h4>🧘 Don't panic</h4>
+            <p>Every developer — including the pros — spends significant time debugging. The difference with vibecoding is that the AI can help you fix things much faster. Error messages are clues, not failures.</p>
+        </div>
+
+        <div class="tutorial-nav">
+            <a href="deployment.html">← Deploy Your App</a>
+            <a href="index.html">Back to Tutorials →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

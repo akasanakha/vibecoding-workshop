@@ -1,0 +1,13 @@
+# Large datasets - download separately
+datasets/climate_canada.csv
+datasets/wildlife_impacts.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

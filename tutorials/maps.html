@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Maps — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>Interactive Maps</h1>
+        <div class="meta">📖 20 min read · 🟡 Intermediate</div>
+
+        <p><strong>Maps are essential for ecology.</strong> Species observations, sampling sites, habitat boundaries, and environmental gradients all have a spatial component. Here's how to add interactive maps to your app.</p>
+
+        <h2>Option 1: Streamlit's Built-in Map</h2>
+        <p>The simplest approach — one line of code.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre># Your dataframe needs 'latitude' and 'longitude' columns
+st.map(df)</pre>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Column names matter</h4>
+            <p>Streamlit's <code>st.map()</code> requires columns named exactly <code>latitude</code> (or <code>lat</code>) and <code>longitude</code> (or <code>lon</code>). If your columns have different names, rename them first.</p>
+        </div>
+
+        <h2>Option 2: Plotly Scatter Mapbox</h2>
+        <p>More control over appearance and interactivity. No API key needed with OpenStreetMap.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>fig = px.scatter_mapbox(
+    df,
+    lat="latitude",
+    lon="longitude",
+    color="species",           # Color points by category
+    size="abundance",           # Size points by value
+    hover_name="site_name",     # Title on hover
+    hover_data=["date", "habitat"],  # Extra info on hover
+    mapbox_style="open-street-map",
+    zoom=5,
+    center={"lat": 50.5, "lon": -96.9},  # Center on Lake Winnipeg
+    title="Species Observation Sites"
+)
+fig.update_layout(height=600)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h3>Available Map Styles (no API key needed)</h3>
+        <ul>
+            <li><code>"open-street-map"</code> — detailed street map</li>
+            <li><code>"carto-positron"</code> — light, clean (great for data visualization)</li>
+            <li><code>"carto-darkmatter"</code> — dark theme</li>
+        </ul>
+
+        <h2>Option 3: Folium for Advanced Maps</h2>
+        <p>Folium gives you the most control, including custom markers, popups, and layers.</p>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>import folium
+from streamlit_folium import st_folium
+
+# Create base map
+m = folium.Map(
+    location=[50.5, -96.9],  # Center coordinates
+    zoom_start=6,
+    tiles="OpenStreetMap"
+)
+
+# Add markers for each observation
+for _, row in df.iterrows():
+    folium.CircleMarker(
+        location=[row["latitude"], row["longitude"]],
+        radius=5,
+        color="green",
+        fill=True,
+        popup=f"{row['species']}<br>Date: {row['date']}"
+    ).add_to(m)
+
+# Display in Streamlit
+st_folium(m, width=700, height=500)</pre>
+        </div>
+
+        <div class="tip-box warning">
+            <h4>⚠️ Add to requirements.txt</h4>
+            <p>If using Folium, add <code>folium</code> and <code>streamlit-folium</code> to your requirements.txt.</p>
+        </div>
+
+        <h2>Common Ecology Map Patterns</h2>
+
+        <h3>Species Distribution Map</h3>
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Create a map showing species observations. Color the points by species name. Size the points by observation count. Add a popup on click that shows species name, date, and habitat type. Center the map automatically based on the data extent."</p>
+        </div>
+
+        <h3>Monitoring Station Dashboard</h3>
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Show monitoring stations on a map. Color each station by its latest water quality index (green = good, yellow = moderate, red = poor). When I click a station, show a time series of water temperature below the map."</p>
+        </div>
+
+        <h3>Heatmap of Observations</h3>
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"Create a density heatmap showing where species observations are concentrated. Use a green-to-red color scale where red = more observations."</p>
+        </div>
+
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>fig = px.density_mapbox(
+    df,
+    lat="latitude",
+    lon="longitude",
+    z="abundance",
+    radius=15,
+    mapbox_style="carto-positron",
+    zoom=5,
+    title="Observation Density"
+)
+st.plotly_chart(fig, use_container_width=True)</pre>
+        </div>
+
+        <h2>Working with GIS Data</h2>
+
+        <p>For more advanced GIS operations, you can use GeoPandas:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Prompt</div>
+            <p>"I have a shapefile of protected areas. Load it with geopandas and display the polygons on a map. Color them by protection category. Add the species observation points on top."</p>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Keep it simple for the workshop</h4>
+            <p>Point data on maps (using Plotly scatter_mapbox) covers most workshop use cases. Save the advanced GIS work (shapefiles, rasters, spatial joins) for later exploration.</p>
+        </div>
+
+        <div class="tutorial-nav">
+            <a href="data-viz.html">← Data Visualization</a>
+            <a href="deployment.html">Next: Deploy Your App →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

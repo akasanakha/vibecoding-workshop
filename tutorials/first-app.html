@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your First App — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html" class="active">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>Build Your First App</h1>
+        <div class="meta">📖 30 min read · 🟡 Intermediate · 🛠️ Hands-on</div>
+
+        <p><strong>Follow along step-by-step to build a complete ecology data dashboard.</strong> We'll use the Palmer Penguins dataset and vibecoding techniques to go from zero to deployed app.</p>
+
+        <h2>What We're Building</h2>
+        <p>An interactive penguin biodiversity explorer with:</p>
+        <ul>
+            <li>Summary metrics (total count, species, islands)</li>
+            <li>Scatter plots colored by species</li>
+            <li>Distribution histograms</li>
+            <li>Sidebar filters</li>
+            <li>A data table</li>
+        </ul>
+
+        <h2>Step 1: Initial Prompt</h2>
+        <p>Open your AI assistant (Claude, ChatGPT, etc.) and send this prompt:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Your First Prompt</div>
+            <p>I want to build a Streamlit web app called "Penguin Biodiversity Explorer" that explores the Palmer Penguins dataset. Load the data from this URL: https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv
+
+Start simple: just load the data, show a title, and display the dataframe. Use st.set_page_config with wide layout and a penguin emoji as the icon.</p>
+        </div>
+
+        <p>The AI will generate something like this:</p>
+
+        <div class="code-block">
+            <span class="code-label">app.py — v1</span>
+            <pre>import streamlit as st
+import pandas as pd
+
+st.set_page_config(page_title="Penguin Explorer", page_icon="🐧", layout="wide")
+
+st.title("🐧 Penguin Biodiversity Explorer")
+
+@st.cache_data
+def load_data():
+    url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv"
+    return pd.read_csv(url)
+
+df = load_data()
+st.dataframe(df)</pre>
+        </div>
+
+        <div class="tip-box success">
+            <h4>✅ Checkpoint: Test it!</h4>
+            <p>Save the code as <code>app.py</code> and run <code>streamlit run app.py</code>. You should see a table of penguin data. If not, paste the error message back to the AI.</p>
+        </div>
+
+        <h2>Step 2: Add Summary Metrics</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Second Prompt</div>
+            <p>Great, that works! Now add three metrics at the top using st.columns and st.metric: total number of penguins, number of species, and number of islands. Also add a brief description below the title explaining the dataset.</p>
+        </div>
+
+        <h2>Step 3: Add Visualizations</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Third Prompt</div>
+            <p>Now add two plotly charts side by side using columns:
+1. A scatter plot of bill_length_mm vs bill_depth_mm, colored by species
+2. A scatter plot of flipper_length_mm vs body_mass_g, colored by species
+
+Add proper axis labels with units. Make both charts use the same color scheme.</p>
+        </div>
+
+        <h2>Step 4: Add Filters</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Fourth Prompt</div>
+            <p>Add a sidebar with filters:
+- Multi-select for species (default: all selected)
+- Multi-select for island (default: all selected)
+- Dropdown for sex (options: All, Male, Female)
+
+All charts and metrics should update when the filters change. Drop rows with missing values in the filtered data.</p>
+        </div>
+
+        <h2>Step 5: Add More Analysis</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Fifth Prompt</div>
+            <p>Add tabs to organize the content: "Overview", "Distributions", and "Data".
+
+In "Overview": keep the metrics and scatter plots.
+
+In "Distributions": add histograms for each numeric measurement (bill length, bill depth, flipper length, body mass), colored by species, arranged in a 2x2 grid.
+
+In "Data": show the filtered dataframe with a download button to export as CSV.</p>
+        </div>
+
+        <h2>Step 6: Polish</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Sixth Prompt</div>
+            <p>Final polish:
+- Add an "About" section at the bottom with the data source citation
+- Improve the color scheme (use a nature-inspired palette)
+- Add a box plot comparing body mass across species in the Overview tab
+- Make sure all charts have clear titles
+- Add the count of filtered vs total penguins in the sidebar</p>
+        </div>
+
+        <h2>Step 7: Prepare for Deployment</h2>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Deployment Prep</div>
+            <p>Generate a requirements.txt file for this app listing all the Python packages needed. Also create a README.md file for the GitHub repository with a brief description, features list, and instructions to run locally.</p>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Total prompts: 7</h4>
+            <p>In about 7 back-and-forth exchanges, you've built a complete, polished, interactive data dashboard. That's vibecoding. Each prompt built on the previous result, adding complexity incrementally.</p>
+        </div>
+
+        <h2>Common Issues & Fixes</h2>
+
+        <h3>"ModuleNotFoundError: No module named 'plotly'"</h3>
+        <p>Run: <code>pip install plotly</code></p>
+
+        <h3>"KeyError: 'column_name'"</h3>
+        <p>The column name in your code doesn't match the actual CSV. Tell the AI: "I'm getting a KeyError for 'column_name'. The actual columns in my CSV are: [paste column names]"</p>
+
+        <h3>"The chart is empty"</h3>
+        <p>Usually means your filters are too restrictive. Check that your default filter values include data. Tell the AI: "The chart shows no data. I think the filters might be excluding everything by default."</p>
+
+        <h3>"The app is slow"</h3>
+        <p>Tell the AI: "The app is slow to load. Can you add @st.cache_data to the data loading function?"</p>
+
+        <div class="tutorial-nav">
+            <a href="streamlit-basics.html">← Streamlit Basics</a>
+            <a href="data-viz.html">Next: Data Visualization →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

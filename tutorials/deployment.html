@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy Your App — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html" class="active">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>Deploy Your App</h1>
+        <div class="meta">📖 10 min read · 🟢 Beginner</div>
+
+        <p><strong>Deployment means putting your app on the internet so anyone with the link can use it.</strong> We'll cover the easiest way: Streamlit Cloud.</p>
+
+        <h2>Before You Deploy</h2>
+
+        <p>Make sure your project has these files in a GitHub repository:</p>
+
+        <div class="code-block">
+            <span class="code-label">Required Files</span>
+            <pre>your-repo/
+├── app.py              # Your Streamlit app
+├── requirements.txt    # Python packages
+└── (optional) data.csv # Dataset, if not loading from URL</pre>
+        </div>
+
+        <h3>Creating requirements.txt</h3>
+        <p>List every Python package your app uses:</p>
+
+        <div class="code-block">
+            <span class="code-label">requirements.txt</span>
+            <pre>streamlit
+pandas
+plotly
+numpy</pre>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Not sure what to include?</h4>
+            <p>Ask the AI: "What packages does my app use? Generate a requirements.txt for it."</p>
+        </div>
+
+        <h2>Method 1: Streamlit Cloud (Recommended)</h2>
+
+        <p>This is the easiest and fastest way to deploy. It's free and takes about 2 minutes.</p>
+
+        <h3>Step 1: Push to GitHub</h3>
+        <p>If you haven't already, create a GitHub repository and push your code:</p>
+
+        <div class="code-block">
+            <span class="code-label">Terminal</span>
+            <pre># Initialize git repository
+git init
+git add .
+git commit -m "Initial commit"
+
+# Create repo on GitHub (if using gh CLI)
+gh repo create my-ecology-app --public --push
+
+# Or add remote manually
+git remote add origin git@github.com:YOUR_USERNAME/my-ecology-app.git
+git push -u origin main</pre>
+        </div>
+
+        <h3>Step 2: Connect to Streamlit Cloud</h3>
+        <ol>
+            <li>Go to <a href="https://share.streamlit.io" target="_blank">share.streamlit.io</a></li>
+            <li>Sign in with your GitHub account</li>
+            <li>Click <strong>"New app"</strong></li>
+            <li>Select your repository</li>
+            <li>Set the main file path (usually <code>app.py</code>)</li>
+            <li>Click <strong>"Deploy!"</strong></li>
+        </ol>
+
+        <h3>Step 3: Wait</h3>
+        <p>Streamlit Cloud will install your dependencies and launch your app. This typically takes 2-5 minutes for the first deployment.</p>
+
+        <div class="tip-box success">
+            <h4>✅ Your app is now live!</h4>
+            <p>You'll get a URL like: <code>https://your-app-name.streamlit.app</code>. Share this with anyone and they can use your app immediately.</p>
+        </div>
+
+        <h3>Updating Your App</h3>
+        <p>Any time you push changes to GitHub, Streamlit Cloud automatically redeploys:</p>
+
+        <div class="code-block">
+            <span class="code-label">Terminal</span>
+            <pre># Make changes to app.py, then:
+git add .
+git commit -m "Added new chart"
+git push
+
+# Streamlit Cloud detects the change and redeploys automatically</pre>
+        </div>
+
+        <h2>Method 2: Vercel</h2>
+        <p>Better for JavaScript/HTML apps. If you built a Next.js or vanilla HTML app:</p>
+        <ol>
+            <li>Go to <a href="https://vercel.com/new" target="_blank">vercel.com/new</a></li>
+            <li>Import your GitHub repository</li>
+            <li>Vercel auto-detects your framework</li>
+            <li>Click "Deploy"</li>
+            <li>Get your URL: <code>https://your-project.vercel.app</code></li>
+        </ol>
+
+        <h2>Method 3: Netlify</h2>
+        <p>Similar to Vercel, good for static sites and JavaScript apps:</p>
+        <ol>
+            <li>Go to <a href="https://app.netlify.com/start" target="_blank">app.netlify.com/start</a></li>
+            <li>Connect to GitHub and select your repo</li>
+            <li>Configure build settings (Netlify usually auto-detects)</li>
+            <li>Click "Deploy site"</li>
+        </ol>
+
+        <h2>Method 4: Hugging Face Spaces</h2>
+        <p>Great for ML/data science apps:</p>
+        <ol>
+            <li>Go to <a href="https://huggingface.co/spaces" target="_blank">huggingface.co/spaces</a></li>
+            <li>Create new Space</li>
+            <li>Choose "Streamlit" as the SDK</li>
+            <li>Upload your files or connect GitHub</li>
+            <li>Space builds automatically</li>
+        </ol>
+
+        <h2>Troubleshooting Deployment</h2>
+
+        <h3>"ModuleNotFoundError" on deployment</h3>
+        <p>You forgot a package in <code>requirements.txt</code>. Add it and push again.</p>
+
+        <h3>"FileNotFoundError" for data files</h3>
+        <p>Use relative paths: <code>pd.read_csv("data.csv")</code>, not absolute paths. Or better yet, load data from a URL.</p>
+
+        <h3>App crashes after deploying</h3>
+        <p>Check the deployment logs for error messages. On Streamlit Cloud, click "Manage app" → "Logs".</p>
+
+        <h3>App works locally but not deployed</h3>
+        <p>Common causes: (1) missing package in requirements.txt, (2) absolute file paths, (3) local-only data files not in the repo. Ask the AI to help debug.</p>
+
+        <div class="tip-box success">
+            <h4>🎉 Congratulations!</h4>
+            <p>You've deployed your first ecology app to the web. Share the link, put it on your CV, show it at lab meeting. You built this!</p>
+        </div>
+
+        <div class="tutorial-nav">
+            <a href="data-viz.html">← Data Visualization</a>
+            <a href="troubleshooting.html">Next: Troubleshooting →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

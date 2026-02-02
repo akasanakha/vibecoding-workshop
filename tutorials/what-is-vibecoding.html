@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Vibecoding? — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html" class="active">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>What is Vibecoding?</h1>
+        <div class="meta">📖 10 min read · 🟢 Beginner</div>
+
+        <p><strong>Vibecoding is building software by describing what you want in plain English, and letting AI write the code for you.</strong></p>
+
+        <p>The term was coined by Andrej Karpathy, co-founder of OpenAI, in February 2025:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Karpathy's Definition</div>
+            <p>"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. I just see stuff, say stuff, run stuff, and copy paste stuff, and it mostly works."</p>
+        </div>
+
+        <h2>Why This Matters for Scientists</h2>
+
+        <p>As ecologists, you have deep domain expertise. You understand species interactions, nutrient cycling, spatial patterns, and ecosystem dynamics. But turning that knowledge into interactive tools traditionally required years of programming training.</p>
+
+        <p>Vibecoding changes the equation: <strong>your domain expertise IS the most valuable skill</strong>. The AI handles the syntax; you handle the science.</p>
+
+        <h3>What you know that AI doesn't:</h3>
+        <ul>
+            <li>Which variables matter in your dataset</li>
+            <li>What visualization would be most informative</li>
+            <li>How to interpret the patterns</li>
+            <li>What questions your audience cares about</li>
+            <li>What would actually be useful for your research</li>
+        </ul>
+
+        <h3>What AI knows that you might not:</h3>
+        <ul>
+            <li>Python/JavaScript syntax</li>
+            <li>Web framework patterns</li>
+            <li>CSS styling</li>
+            <li>Deployment configurations</li>
+            <li>Library APIs</li>
+        </ul>
+
+        <h2>How It Works in Practice</h2>
+
+        <p>Here's a real example of vibecoding an ecology app:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">You Say</div>
+            <p>"Build me a Streamlit app that loads the Palmer Penguins CSV dataset. Show a scatter plot of bill length vs bill depth, colored by species. Add a sidebar where I can filter by island and sex."</p>
+        </div>
+
+        <p>The AI generates a complete, working Python script. You run it. It works (mostly). Then you iterate:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">You Say</div>
+            <p>"Great, but make the chart bigger, add a trendline for each species, and put summary statistics in a table below the chart."</p>
+        </div>
+
+        <p>Each iteration takes seconds. Within minutes, you have a polished interactive dashboard that would have taken days to build from scratch.</p>
+
+        <h2>Traditional Coding vs. Vibecoding</h2>
+
+        <div class="tip-box">
+            <h4>Traditional Approach</h4>
+            <p>Learn Python → Learn Pandas → Learn Plotly → Learn Streamlit → Learn CSS → Learn deployment → Build your app (weeks to months)</p>
+        </div>
+
+        <div class="tip-box success">
+            <h4>Vibecoding Approach</h4>
+            <p>Describe what you want → AI writes the code → You test and iterate → Deploy (hours)</p>
+        </div>
+
+        <h2>What You Can Build</h2>
+
+        <p>With vibecoding and Streamlit, ecology students have built:</p>
+
+        <ul>
+            <li><strong>Species distribution dashboards</strong> — interactive maps showing where species occur, filtered by time and habitat</li>
+            <li><strong>Water quality monitors</strong> — real-time visualizations of environmental parameters across monitoring stations</li>
+            <li><strong>Biodiversity calculators</strong> — tools that compute diversity indices from community data</li>
+            <li><strong>Field data entry apps</strong> — custom forms that validate and store field observations</li>
+            <li><strong>Literature analysis tools</strong> — apps that help visualize research trends</li>
+            <li><strong>Conservation priority rankers</strong> — decision support tools for resource allocation</li>
+        </ul>
+
+        <h2>Important Caveats</h2>
+
+        <div class="tip-box warning">
+            <h4>⚠️ Vibecoding is not magic</h4>
+            <p>AI-generated code can have bugs, security issues, and performance problems. For workshop projects and research prototypes, this is fine. For production software handling sensitive data, you'll want proper code review. Think of vibecoding as rapid prototyping — getting from idea to working proof-of-concept fast.</p>
+        </div>
+
+        <h2>Ready to Start?</h2>
+
+        <p>In the next tutorial, you'll learn the most important vibecoding skill: <strong>how to prompt effectively</strong>. The quality of your prompts directly determines the quality of what the AI builds for you.</p>
+
+        <div class="tutorial-nav">
+            <a href="index.html">← Back to Tutorials</a>
+            <a href="prompting.html">Next: The Art of Prompting →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

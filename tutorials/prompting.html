@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Prompting — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html">Tutorials</a>
+                <a href="prompting.html" class="active">Prompting</a>
+                <a href="streamlit-basics.html">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>The Art of Prompting</h1>
+        <div class="meta">📖 15 min read · 🟢 Beginner</div>
+
+        <p><strong>The quality of your prompts determines the quality of what AI builds for you.</strong> This guide teaches you how to communicate effectively with AI coding assistants.</p>
+
+        <h2>The Five Golden Rules</h2>
+
+        <h3>1. Be Specific</h3>
+        <p>Vague prompts produce vague results. Compare:</p>
+
+        <div class="tip-box warning">
+            <h4>❌ Too Vague</h4>
+            <p>"Make a chart of my data"</p>
+        </div>
+
+        <div class="tip-box success">
+            <h4>✅ Specific</h4>
+            <p>"Make a bar chart showing the count of species observations per habitat type. Use plotly, with habitat on the x-axis and count on the y-axis. Color each bar by habitat type."</p>
+        </div>
+
+        <h3>2. Go Step by Step</h3>
+        <p>Don't ask for the entire app at once. Build incrementally:</p>
+        <ol>
+            <li>First: "Create a Streamlit app that loads my CSV file and displays it as a table"</li>
+            <li>Then: "Add a scatter plot of column_x vs column_y"</li>
+            <li>Then: "Add a sidebar filter for the species column"</li>
+            <li>Then: "Add a second tab with a map view"</li>
+        </ol>
+
+        <h3>3. Show Your Data Structure</h3>
+        <p>The AI doesn't know your data unless you tell it. Always describe your columns:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Good Prompt</div>
+            <p>"My CSV file has these columns: site_id (string), date (YYYY-MM-DD), latitude (float), longitude (float), species_name (string), abundance (integer), habitat_type (categorical: forest/wetland/grassland). Load this file and create a map showing each site, with point size proportional to total abundance."</p>
+        </div>
+
+        <h3>4. Iterate, Don't Start Over</h3>
+        <p>When something isn't right, describe what to change instead of starting fresh:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Iteration Prompt</div>
+            <p>"The chart looks good, but: (1) make the title larger, (2) change the color scheme to viridis, (3) add axis labels with units, and (4) remove the legend since there's only one variable."</p>
+        </div>
+
+        <h3>5. Ask Why</h3>
+        <p>If the AI does something unexpected, ask it to explain:</p>
+
+        <div class="prompt-box">
+            <div class="prompt-label">Understanding Prompt</div>
+            <p>"Why did you use st.cache_data here? What does the @st.cache_data decorator do?"</p>
+        </div>
+
+        <h2>Prompt Templates for Ecology Apps</h2>
+
+        <h3>Starting a New Project</h3>
+        <div class="code-block">
+            <span class="code-label">Template</span>
+            <pre>I want to build a Streamlit web app that:
+- Loads a CSV dataset about [TOPIC]
+- The dataset has columns: [LIST YOUR COLUMNS]
+- Shows [SPECIFIC VISUALIZATION]
+- Lets users [SPECIFIC INTERACTION]
+
+Use Python with streamlit and plotly.
+Let's start with loading and displaying the data.</pre>
+        </div>
+
+        <h3>Adding a Chart</h3>
+        <div class="code-block">
+            <span class="code-label">Template</span>
+            <pre>Add a [CHART TYPE] that shows [WHAT TO PLOT].
+- X-axis: [column name] ([units])
+- Y-axis: [column name] ([units])
+- Color by: [column name]
+- Add a title: "[YOUR TITLE]"
+Use plotly for interactivity.</pre>
+        </div>
+
+        <h3>Adding a Map</h3>
+        <div class="code-block">
+            <span class="code-label">Template</span>
+            <pre>Add an interactive map showing [WHAT].
+- Latitude column: [name]
+- Longitude column: [name]
+- Color points by: [column]
+- Size points by: [column or "uniform"]
+- Add popups showing: [what info on click]
+- Center the map on: [location or "auto"]</pre>
+        </div>
+
+        <h3>Adding Filters</h3>
+        <div class="code-block">
+            <span class="code-label">Template</span>
+            <pre>Add a sidebar with these filters:
+- Dropdown to filter by [COLUMN] (allow multiple selections)
+- Date range picker for [DATE_COLUMN]
+- Slider for [NUMERIC_COLUMN] range
+All visualizations should update when filters change.</pre>
+        </div>
+
+        <h3>Fixing Errors</h3>
+        <div class="code-block">
+            <span class="code-label">Template</span>
+            <pre>I'm getting this error when I run the app:
+
+[PASTE THE FULL ERROR MESSAGE]
+
+The error occurs in [DESCRIBE WHERE/WHEN].
+Here's the relevant code section:
+
+[PASTE THE CODE]
+
+What's wrong and how do I fix it?</pre>
+        </div>
+
+        <h3>Improving the UI</h3>
+        <div class="code-block">
+            <span class="code-label">Template</span>
+            <pre>Improve the layout of this app:
+- Add a title and description at the top
+- Organize the content into [N] tabs: [tab names]
+- Use a clean, professional color scheme
+- Add units and labels to all charts
+- Make it responsive on mobile
+- Add an "About" section explaining the data source</pre>
+        </div>
+
+        <h2>Common Prompting Mistakes</h2>
+
+        <div class="tip-box warning">
+            <h4>❌ Being too ambitious at once</h4>
+            <p>"Build me a complete biodiversity monitoring platform with user authentication, real-time data ingestion, machine learning predictions, and a mobile app."</p>
+        </div>
+
+        <div class="tip-box warning">
+            <h4>❌ Not providing context</h4>
+            <p>"Add a chart." (What chart? What data? What columns?)</p>
+        </div>
+
+        <div class="tip-box warning">
+            <h4>❌ Accepting the first result</h4>
+            <p>Always test what the AI generates. If something doesn't look right, tell it what's wrong. The best results come from 3-5 iterations.</p>
+        </div>
+
+        <div class="tip-box warning">
+            <h4>❌ Not reading error messages</h4>
+            <p>When you get an error, copy the ENTIRE error message and paste it to the AI. Don't paraphrase — the exact text matters.</p>
+        </div>
+
+        <h2>Pro Tips</h2>
+
+        <ul>
+            <li><strong>Start each session with context:</strong> "I'm building a Streamlit app for [purpose]. Here's my current code: [paste]. I want to add [feature]."</li>
+            <li><strong>Ask for alternatives:</strong> "Show me 3 different ways to visualize this species abundance data"</li>
+            <li><strong>Request explanations:</strong> "Add comments to this code explaining what each section does"</li>
+            <li><strong>Use screenshots:</strong> Some AI tools accept images. Screenshot your current app and say "How do I improve this layout?"</li>
+            <li><strong>Save your best prompts:</strong> When a prompt works well, save it for reuse</li>
+        </ul>
+
+        <div class="tutorial-nav">
+            <a href="what-is-vibecoding.html">← What is Vibecoding?</a>
+            <a href="streamlit-basics.html">Next: Streamlit Basics →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamlit Basics — Tutorials</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">🌿 Vibecoding for Ecologists</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="index.html">Tutorials</a>
+                <a href="prompting.html">Prompting</a>
+                <a href="streamlit-basics.html" class="active">Streamlit</a>
+                <a href="deployment.html">Deployment</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tutorial-content">
+        <h1>Streamlit Basics</h1>
+        <div class="meta">📖 15 min read · 🟢 Beginner</div>
+
+        <p><strong>Streamlit turns Python scripts into interactive web apps.</strong> It's the fastest way to go from data to deployed dashboard, and it's our recommended tool for this workshop.</p>
+
+        <h2>Why Streamlit?</h2>
+        <ul>
+            <li><strong>Minimal learning curve</strong> — if you've seen a Python script, you can read Streamlit code</li>
+            <li><strong>No web development knowledge needed</strong> — no HTML, CSS, or JavaScript required</li>
+            <li><strong>Built for data</strong> — native support for dataframes, charts, and maps</li>
+            <li><strong>Free deployment</strong> — Streamlit Cloud hosts your app for free</li>
+            <li><strong>AI understands it</strong> — every AI coding assistant knows Streamlit well</li>
+        </ul>
+
+        <h2>The Anatomy of a Streamlit App</h2>
+
+        <p>Here's the simplest possible Streamlit app:</p>
+
+        <div class="code-block">
+            <span class="code-label">app.py</span>
+            <pre>import streamlit as st
+
+st.title("Hello, Ecology! 🌿")
+st.write("This is my first Streamlit app.")</pre>
+        </div>
+
+        <p>That's it. Two lines of meaningful code, and you have a web app.</p>
+
+        <h2>A Real Ecology Example</h2>
+
+        <p>Here's a more realistic app that loads data and creates an interactive visualization:</p>
+
+        <div class="code-block">
+            <span class="code-label">app.py</span>
+            <pre>import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+# Page config
+st.set_page_config(
+    page_title="Penguin Explorer",
+    page_icon="🐧",
+    layout="wide"
+)
+
+# Title
+st.title("🐧 Palmer Penguins Explorer")
+st.write("Explore morphological measurements of penguins in Antarctica.")
+
+# Load data
+@st.cache_data
+def load_data():
+    url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv"
+    return pd.read_csv(url)
+
+df = load_data()
+
+# Sidebar filters
+st.sidebar.header("Filters")
+species = st.sidebar.multiselect(
+    "Species",
+    options=df["species"].unique(),
+    default=df["species"].unique()
+)
+island = st.sidebar.multiselect(
+    "Island",
+    options=df["island"].unique(),
+    default=df["island"].unique()
+)
+
+# Filter data
+filtered = df[
+    (df["species"].isin(species)) &
+    (df["island"].isin(island))
+]
+
+# Show metrics
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Penguins", len(filtered))
+col2.metric("Species", filtered["species"].nunique())
+col3.metric("Islands", filtered["island"].nunique())
+
+# Scatter plot
+fig = px.scatter(
+    filtered,
+    x="bill_length_mm",
+    y="bill_depth_mm",
+    color="species",
+    title="Bill Length vs Bill Depth",
+    labels={
+        "bill_length_mm": "Bill Length (mm)",
+        "bill_depth_mm": "Bill Depth (mm)"
+    }
+)
+st.plotly_chart(fig, use_container_width=True)
+
+# Data table
+st.subheader("Raw Data")
+st.dataframe(filtered)</pre>
+        </div>
+
+        <h2>Key Streamlit Components</h2>
+
+        <h3>Text & Layout</h3>
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>st.title("Main Title")           # Big heading
+st.header("Section Header")      # Medium heading
+st.subheader("Subsection")       # Smaller heading
+st.write("Regular text")         # Paragraph text
+st.markdown("**Bold** and *italic*")  # Markdown support
+
+# Columns for side-by-side layout
+col1, col2 = st.columns(2)
+with col1:
+    st.write("Left side")
+with col2:
+    st.write("Right side")
+
+# Tabs for organized content
+tab1, tab2 = st.tabs(["Charts", "Data"])
+with tab1:
+    st.write("Charts go here")
+with tab2:
+    st.write("Data table goes here")</pre>
+        </div>
+
+        <h3>Data Display</h3>
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>st.dataframe(df)              # Interactive table
+st.table(df.head())           # Static table
+st.metric("Label", 42, "+5")  # Metric with delta
+st.json({"key": "value"})    # JSON display</pre>
+        </div>
+
+        <h3>Charts (Plotly)</h3>
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre>import plotly.express as px
+
+# Scatter plot
+fig = px.scatter(df, x="col_x", y="col_y", color="category")
+st.plotly_chart(fig, use_container_width=True)
+
+# Bar chart
+fig = px.bar(df, x="category", y="count", color="group")
+st.plotly_chart(fig)
+
+# Line chart (time series)
+fig = px.line(df, x="date", y="value", color="station")
+st.plotly_chart(fig)
+
+# Histogram
+fig = px.histogram(df, x="measurement", nbins=30, color="species")
+st.plotly_chart(fig)
+
+# Box plot
+fig = px.box(df, x="species", y="body_mass_g", color="species")
+st.plotly_chart(fig)</pre>
+        </div>
+
+        <h3>Maps</h3>
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre># Simple map (requires 'latitude' and 'longitude' columns)
+st.map(df)
+
+# Advanced map with Plotly
+fig = px.scatter_mapbox(
+    df,
+    lat="latitude",
+    lon="longitude",
+    color="species",
+    size="abundance",
+    hover_name="site_name",
+    mapbox_style="open-street-map",
+    zoom=5,
+    title="Species Observations"
+)
+st.plotly_chart(fig)</pre>
+        </div>
+
+        <h3>User Input (Sidebar Filters)</h3>
+        <div class="code-block">
+            <span class="code-label">Python</span>
+            <pre># Dropdown (single select)
+choice = st.sidebar.selectbox("Select species", df["species"].unique())
+
+# Multi-select
+selected = st.sidebar.multiselect("Select islands", df["island"].unique())
+
+# Slider
+min_val, max_val = st.sidebar.slider(
+    "Body mass range (g)",
+    min_value=2000, max_value=6500,
+    value=(2000, 6500)
+)
+
+# Date input
+date = st.sidebar.date_input("Select date")
+
+# Text input
+search = st.sidebar.text_input("Search species name")
+
+# Checkbox
+show_raw = st.sidebar.checkbox("Show raw data", value=False)
+if show_raw:
+    st.dataframe(df)</pre>
+        </div>
+
+        <h2>Running Your App Locally</h2>
+
+        <div class="code-block">
+            <span class="code-label">Terminal</span>
+            <pre># Install dependencies
+pip install streamlit pandas plotly
+
+# Run your app
+streamlit run app.py
+
+# App opens in browser at http://localhost:8501</pre>
+        </div>
+
+        <div class="tip-box success">
+            <h4>💡 You don't need to memorize any of this</h4>
+            <p>Just tell the AI what you want, and it will use these components for you. This reference is here so you can understand what the AI generates and make targeted requests for changes.</p>
+        </div>
+
+        <h2>File Structure for Deployment</h2>
+
+        <p>Your project needs at minimum these files:</p>
+
+        <div class="code-block">
+            <span class="code-label">Project Structure</span>
+            <pre>my-ecology-app/
+├── app.py              # Your main Streamlit app
+├── requirements.txt    # Python packages needed
+└── data.csv            # Your dataset (optional if loading from URL)</pre>
+        </div>
+
+        <p>Your <code>requirements.txt</code> should list all packages:</p>
+
+        <div class="code-block">
+            <span class="code-label">requirements.txt</span>
+            <pre>streamlit
+pandas
+plotly
+numpy</pre>
+        </div>
+
+        <div class="tutorial-nav">
+            <a href="prompting.html">← The Art of Prompting</a>
+            <a href="first-app.html">Next: Build Your First App →</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🌿 Vibecoding for Ecologists — <a href="https://github.com/akasanakha/vibecoding-workshop">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>
